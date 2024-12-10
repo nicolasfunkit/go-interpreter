@@ -1,0 +1,28 @@
+# https://taskfile.dev
+# Run in devcontainer
+version: "3"
+
+silent: true
+
+env:
+  DCRUN: docker compose run --rm
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  app:up:
+    desc: Launch mandatory commands for the app to be up&ready
+    status:
+      - /bin/bash -c "[[ -z \"${CI}\" ]] && exit 1 || exit 0"
+    cmds:
+      - echo -e "\033[0;32m✔\033[0m All good, the dev environment is running, let's go coding."
+      - echo ""
+
+  app:test:
+    desc: Launch mandatory commands for the app to be up&ready
+    status:
+      - /bin/bash -c "[[ -z \"${CI}\" ]] && exit 1 || exit 0"
+    cmds:
+      - go test ./lexer
